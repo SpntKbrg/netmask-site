@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Calculate subnet" />
+    <title>Subnet Calculator</title>
+    <link href="responsive.min.css" rel="stylesheet" />
+    <link href="responsive.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Subnet Calculator</h2>
+      <form action="#">
+        <fieldset>
+          <div class="row">
+            <div class="col-s-6">
+
+              <div class="row">
+                <div class="col-s-4">
+                  <label for="ip">IP Address : </label>
+                </div>
+                <div class="col-s-8">
+                  <input id="ip" type="text" name="ip">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-s-4">
+                  <label for="subnet">Subnet : </label>
+                </div>
+                <div class="col-s-8">
+                  <select id="subnet">
+                    <option value="32">255.255.255.255 /32</option>
+                    <option value="31">255.255.255.254 /31</option>
+                    <option value="30">255.255.255.252 /30</option>
+                    <option value="29">255.255.255.248 /29</option>
+                    <option value="28">255.255.255.240 /28</option>
+                    <option value="27">255.255.255.224 /27</option>
+                    <option value="26">255.255.255.192 /26</option>
+                    <option value="25">255.255.255.128 /25</option>
+                    <option value="24">255.255.255.0 /24</option>
+                    <option value="23">255.255.254.0 /23</option>
+                    <option value="22">255.255.252.0 /22</option>
+                    <option value="21">255.255.248.0 /21</option>
+                    <option value="20">255.255.240.0 /20</option>
+                    <option value="19">255.255.224.0 /19</option>
+                    <option value="18">255.255.192.0 /18</option>
+                    <option value="17">255.255.128.0 /17</option>
+                    <option value="16">255.255.0.0 /16</option>
+                    <option value="15">255.254.0.0 /15</option>
+                    <option value="14">255.252.0.0 /14</option>
+                    <option value="13">255.248.0.0 /13</option>
+                    <option value="12">255.240.0.0 /12</option>
+                    <option value="11">255.224.0.0 /11</option>
+                    <option value="10">255.192.0.0 /10</option>
+                    <option value="9">255.128.0.0 /9</option>
+                    <option value="8">255.0.0.0 /8</option>
+                    <option value="7">254.0.0.0 /7</option>
+                    <option value="6">252.0.0.0 /6</option>
+                    <option value="5">248.0.0.0 /5</option>
+                    <option value="4">240.0.0.0 /4</option>
+                    <option value="3">224.0.0.0 /3</option>
+                    <option value="2">192.0.0.0 /2</option>
+                    <option value="1">128.0.0.0 /1</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-s-4">
+                  <label>Network class : </label>
+                </div>
+                <div class="col-s-1">
+                  <label for="classAny">Any </label>
+                  <input id="classAny" type="radio" name="netclass" value="Any">
+                </div>
+                <div class="col-s-1">
+                  <label for="classA">A </label>
+                  <input id="classA" type="radio" name="netclass" value="A">
+                </div>
+                <div class="col-s-1">
+                  <label for="classB">B </label>
+                  <input id="classB" type="radio" name="netclass" value="B">
+                </div>
+                <div class="col-s-1">
+                  <label for="classC">C </label>
+                  <input id="classC" type="radio" name="netclass" value="C">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <script src="main.js"></script>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-m-6"><h4>Information</h4>
+          <ul class="dl-horizontal, colored">
+            <li>IP address : <a id="recvIp"></a></li>
+            <li>Network Address : </li>
+            <li>Usable Host IP Range : </li>
+            <li>Broadcast Address : </li>
+            <li>Total Number of Hosts : </li>
+            <li>Number of Usable Hosts : </li>
+            <li>Subnet Mask : </li>
+            <li>Wildcard Mask : </li>
+            <li>Binary Subnet Mask : </li>
+            <li>IP Class : </li>
+            <li>IP Type : </li>
+            <li>CIDR Notation : </li>
+            <li>Short : </li>
+            <li>Binary ID : </li>
+            <li>Integer ID : </li>
+            <li>Hex ID : </li>
+            <li>in-addr.arpa : </li>
+            <li>IPv4 Mapped Address : </li>
+            <li>6to4 Prefix : </li>
+          </ul>
+        </div>
+        <div class="col-m-6"><h4>All Possible /-- Networks for ---.---.---.---</h4>
+        <table>
+            <tr>
+              <th>Network address</th>
+              <th>Usable network range</th>
+              <th>Broadcast address</th>
+            </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+    <script src="vendor/jquery-2.1.4.min.js"></script>
+    <script src="responsive.min.js"></script>
+    <script src="responsive.js"></script>
+  </body>
+</html>
