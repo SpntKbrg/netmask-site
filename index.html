@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <h2>Subnet Calculator</h2>
-      <form action="#">
+      <form id="inputForm">
         <fieldset>
           <div class="row">
             <div class="col-s-6">
@@ -22,7 +22,7 @@
                   <label for="ip">IP Address : </label>
                 </div>
                 <div class="col-s-8">
-                  <input id="ip" type="text" name="ip">
+                  <input id="ip" required type="text" name="ip" pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$">
                 </div>
               </div>
 
@@ -31,7 +31,7 @@
                   <label for="subnet">Subnet : </label>
                 </div>
                 <div class="col-s-8">
-                  <select id="subnet">
+                  <select name="subnet" id="subnet">
                     <option value="32">255.255.255.255 /32</option>
                     <option value="31">255.255.255.254 /31</option>
                     <option value="30">255.255.255.252 /30</option>
@@ -72,27 +72,22 @@
                 <div class="col-s-4">
                   <label>Network class : </label>
                 </div>
-                <div class="col-s-1">
-                  <label for="classAny">Any </label>
-                  <input id="classAny" type="radio" name="netclass" value="Any">
-                </div>
-                <div class="col-s-1">
-                  <label for="classA">A </label>
-                  <input id="classA" type="radio" name="netclass" value="A">
-                </div>
-                <div class="col-s-1">
-                  <label for="classB">B </label>
-                  <input id="classB" type="radio" name="netclass" value="B">
-                </div>
-                <div class="col-s-1">
-                  <label for="classC">C </label>
-                  <input id="classC" type="radio" name="netclass" value="C">
+                <div class="col-s-8">
+                  <select name="netclass" id="netclass">
+                    <option value="0">Any</option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                  </select>
                 </div>
               </div>
 
             </div>
           </div>
         </fieldset>
+        <div class="form-actions">
+                <button type="button" onclick="getData()">Save changes</button>
+        </div>
       </form>
       <script src="main.js"></script>
     </div>
@@ -100,29 +95,31 @@
       <div class="row">
         <div class="col-m-6"><h4>Information</h4>
           <ul class="dl-horizontal, colored">
-            <li>IP address : <a id="recvIp"></a></li>
-            <li>Network Address : </li>
-            <li>Usable Host IP Range : </li>
-            <li>Broadcast Address : </li>
-            <li>Total Number of Hosts : </li>
-            <li>Number of Usable Hosts : </li>
-            <li>Subnet Mask : </li>
-            <li>Wildcard Mask : </li>
-            <li>Binary Subnet Mask : </li>
-            <li>IP Class : </li>
-            <li>IP Type : </li>
-            <li>CIDR Notation : </li>
-            <li>Short : </li>
-            <li>Binary ID : </li>
-            <li>Integer ID : </li>
-            <li>Hex ID : </li>
-            <li>in-addr.arpa : </li>
-            <li>IPv4 Mapped Address : </li>
-            <li>6to4 Prefix : </li>
+            <li>IP address : <b id="dispIp"></b></li>
+            <li>Network Address : <b id="dispNetIp"></b></li>
+            <li>Usable Host IP Range : <b id="dispIpRange"></b></li>
+            <li>Broadcast Address : <b id="dispIpBroad"></b></li>
+            <li>Total Number of Hosts : <b id="dispHost"></b></li>
+            <li>Number of Usable Hosts : <b id="dispHostUse"></b></li>
+            <li>Subnet Mask : <b id="dispMaskSub"></b></li>
+            <li>Wildcard Mask : <b id="dispMaskWild"></b></li>
+            <li>Binary Subnet Mask : <b id="dispMaskBin"></b></li>
+            <li>IP Class : <b id="dispNetclass"></b></li>
+            <li>IP Type : <b id="dispType"></b></li>
+            <li>CIDR Notation : <b id="dispSubnet"></b></li>
+            <li>Short : <b id="dispIpShort"></b></li>
+            <li>Binary ID : <b id="dispIdBin"></b></li>
+            <li>Integer ID : <b id="dispIdDec"></b></li>
+            <li>Hex ID : <b id="dispIdHex"></b></li>
+            <!------------------------------------->
+            <!-- <li>in-addr.arpa : </li>       -->
+            <!-- <li>IPv4 Mapped Address : </li> -->
+            <!-- <li>6to4 Prefix : </li>         -->
+            <!------------------------------------->
           </ul>
         </div>
-        <div class="col-m-6"><h4>All Possible /-- Networks for ---.---.---.---</h4>
-        <table>
+        <div class="col-m-6"><h4>All Possible <a id="dispSubnet2"></a> Networks for <a id="dispIpWild"></a></h4>
+        <table id="netTable">
             <tr>
               <th>Network address</th>
               <th>Usable network range</th>

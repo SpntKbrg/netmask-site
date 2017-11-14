@@ -1,10 +1,10 @@
 /** ==|== Responsive =============================================================
-	Author: James Jackson-South
-	twitter : http://twitter.com/James_M_South
-	github : https://github.com/ResponsiveBP/Responsive
-	Copyright (c),  James Jackson-South.
-	Licensed under the MIT License.
-	============================================================================== */
+  Author: James Jackson-South
+  twitter : http://twitter.com/James_M_South
+  github : https://github.com/ResponsiveBP/Responsive
+  Copyright (c),  James Jackson-South.
+  Licensed under the MIT License.
+  ============================================================================== */
 /*! Responsive v4.1.4 | MIT License | responsivebp.com */
 /*! normalize.css v3.0.3 | MIT License | git.io/normalize */
 html {
@@ -177,8 +177,14 @@ div:not([tabindex]):focus {
   outline: none; }
 
 h1, h2, h3, h4, h5, h6 {
-  text-rendering: optimizeLegibility;
-  page-break-after: avoid; }
+    background-color:#ccccee;
+    text-rendering: optimizeLegibility;
+    page-break-after: avoid;
+    padding-top: 5px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+}
 
 h1 {
   font-size: 2rem;
@@ -193,8 +199,8 @@ h3 {
   margin: 1.17rem 0; }
 
 h4 {
-  font-size: 1rem;
-  margin: 1.33rem 0; }
+    font-size: 1rem;
+    margin: 1.33rem 0; }
 
 h5 {
   font-size: 0.83rem;
@@ -268,6 +274,7 @@ hr {
   width: 100%;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
+
   background-clip: padding-box; }
   [dir="rtl"] [class*=col-], [dir="rtl"]
   [class*="block-row-"] > * {
@@ -2572,10 +2579,10 @@ button.modal-direction {
     text-decoration: underline; }
 
 @media print and (max-width: 536px), screen and (max-width: 47.99em) {
-  /*
-	 * Force the columns to display as rows on small viewports.
+    /*
+     * Force the columns to display as rows on small viewports.
      * Headers are applied with data attributes.
-	 */
+     */
   [data-table-list] {
     opacity: 0; }
   .table-list {
