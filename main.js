@@ -13,6 +13,8 @@ var addr;
 var netAddr; // TODO: Group that IP belong in
 var subnetBin;
 var subnetAddr;
+var range;
+var broad;
 var wildSubnetAddr;
 var wildIp;
 function getData() {
@@ -21,12 +23,54 @@ function getData() {
     netclass = document.getElementById("netclass");
     updateData();
 }
+
+function getBroadCastAddr(netAddr, wildCard) {
+    if (parseInt(wildCard.join('')) === 0) {
+        return netAddr;
+    }
+    var tmp = netAddr.split('.');
+    for (i in tmp) {
+        tmp[i] = parseInt(tmp[i]);
+    }
+    for (var i = 0; i < 4; i++) {
+        tmp[i] += parseInt(wildCard[i]);
+    }
+    return tmp.join('.');
+}
+
+function getBinSubnet(subnetCIDR) {
+    var subnetBin = '';
+    for (var i = 0; i < 32; i++) {
+        subnetBin += i < subnetCIDR ? 1 : 0;
+    }
+    return subnetBin;
+}
+
+function binToDecSet(bin) {
+    var result = [];
+    for (var i = 0; i < 4; i++) {
+        result.push(parseInt(bin.slice(i * 8, (i + 1) * 8), 2));
+    }
+    return result.join('.');
+}
+
+function calNetAddr(ip, subnetCIDR) {
+    var result = [];
+    var subnetSet = binToDecSet(getBinSubnet(subnetCIDR)).split('.');
+    for (var i = 0; i < 4; i++) {
+        var tmp = Number(ip[i]);
+        result.push(tmp & parseInt(subnetSet[i]));
+    }
+    return result.join('.');
+}
+
 function updateData() {
     addr = ipNum.value.trim().split('.');
     var subnetVal = 32 - subnet.value;
     hosts = 2 ** subnetVal;
     subnetAddr = new Array(0, 0, 0, 0);
     wildSubnetAddr = new Array(255, 255, 255, 255);
+    netAddr = calNetAddr(addr, subnet.value);
     switch (parseInt(subnet.value)) {
     case 32 :
         subnetAddr[3] = subnetAddr[3] + 1;
@@ -182,15 +226,19 @@ function updateData() {
     else {
         hostsUse = 0;
     }
+    broad = getBroadCastAddr(netAddr, wildSubnetAddr);
     displayData();
 }
 function displayData() {
     fillTable();
     document.getElementById("dispIp").innerHTML = ipNum.value;
     document.getElementById("dispHost").innerHTML = hosts;
+    document.getElementById("dispNetIp").innerHTML = netAddr;
+    document.getElementById("dispIpRange").innerHTML = netAddr + ' - ' + broad;
+    document.getElementById("dispIpBroad").innerHTML = broad;
     document.getElementById("dispHostUse").innerHTML = hostsUse;
     document.getElementById("dispSubnet").innerHTML = '/' + subnet.value;
-    document.getElementById("dispSubnet2").innerHTML = '/' + subnet.value;
+    //    document.getElementById("dispSubnet2").innerHTML = '/' + subnet.value;
     document.getElementById("dispMaskSub").innerHTML = subnetAddr[0] + '.' + subnetAddr[1] + '.' + subnetAddr[2] + '.' + subnetAddr[3];
     document.getElementById("dispMaskWild").innerHTML = wildSubnetAddr[0] + '.' + wildSubnetAddr[1] + '.' + wildSubnetAddr[2] + '.' + wildSubnetAddr[3];
     document.getElementById("dispMaskBin").innerHTML = subnetBin.slice(0, 8) + '.' + subnetBin.slice(9, 16) + '.' + subnetBin.slice(17, 24) + '.' + subnetBin.slice(25, 32);
@@ -200,7 +248,7 @@ function displayData() {
     document.getElementById("dispIdDec").innerHTML = id;
     document.getElementById("dispIdBin").innerHTML = idBin;
     document.getElementById("dispIdHex").innerHTML = '0x' + idHex;
-    document.getElementById("dispIpWild").innerHTML = wildIp[0] + '.' + wildIp[1] + '.' + wildIp[2] + '.' + wildIp[3];
+    //document.getElementById("dispIpWild").innerHTML = wildIp[0] + '.' + wildIp[1] + '.' + wildIp[2] + '.' + wildIp[3];
 }
 function fillTable() {
     for (var i = 0; i < 11; i += 1) {
